@@ -1,0 +1,11 @@
+# Dépendances optionnelles pour le Makefile (médias).
+# Installer : mise install
+# Commandes : make check | make test | make normalize-audio
+#             make compress-videos | make compress-images | make media
+#             make package | make clean | make help
+#
+# `zip` reste un binaire système (paquet zip / Info-ZIP).
+# `ffmpeg = "latest"` : outil local hors runtime live ; voir docs/dev.md.
+
+[tools]
+ffmpeg = "latest"

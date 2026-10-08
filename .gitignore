@@ -1,0 +1,29 @@
+# Médias locaux (stream) — hors dépôt, sauf dossiers sample
+photos/*
+!photos/sample-1/
+!photos/sample-2/
+
+videos/*
+!videos/sample-1/
+!videos/sample-2/
+
+# Quiz locaux — hors dépôt, sauf samples + manifeste versionné
+quiz/*
+!quiz/sample-1.js
+!quiz/sample-2.js
+!quiz/manifest.js
+
+# Originaux sauvegardés par `make media` et `make normalize-audio` (hors dépôt)
+media-originals/
+
+# Archive générée par `make package`
+*.zip
+
+# OS / éditeurs
+.DS_Store
+Thumbs.db
+*~
+*.swp
+.idea/
+.vscode/
+.cursor/
