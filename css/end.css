@@ -1,0 +1,123 @@
+.end-panel {
+  position: relative;
+  text-align: center;
+  padding: 10px 8px 6px;
+  overflow: hidden;
+}
+.end-panel.is-open .end-title,
+.end-panel.is-open .end-score,
+.end-panel.is-open .end-thanks,
+.end-panel.is-open .end-credit,
+.end-panel.is-open .end-actions .btn-secondary,
+.end-panel.is-open .end-actions .btn-primary {
+  animation: soft-in 0.55s ease both;
+}
+.end-panel.is-open .end-score { animation-delay: 0.1s; }
+.end-panel.is-open .end-thanks { animation-delay: 0.22s; }
+.end-panel.is-open .end-credit { animation-delay: 0.36s; }
+.end-panel.is-open .end-actions .btn-secondary { animation-delay: 0.45s; }
+.end-panel.is-open .end-actions .btn-primary { animation-delay: 0.55s; }
+
+.end-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--yt);
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+.end-panel.is-open .end-title {
+  animation: end-pop 0.7s cubic-bezier(0.2, 0.9, 0.3, 1.25) both;
+}
+
+.end-score {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--ink-strong);
+  margin: 0 0 10px;
+  letter-spacing: -0.02em;
+}
+.end-score .end-score-ok {
+  color: var(--lime-deep);
+}
+.end-score .end-score-total {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.end-thanks {
+  color: var(--ink);
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.45;
+  margin: 0 auto 10px;
+  max-width: 420px;
+}
+
+.end-credit {
+  display: block;
+  color: var(--hint);
+  font-size: 0.7rem;
+  font-weight: 400;
+  font-style: italic;
+  margin-bottom: 12px;
+}
+
+.end-actions {
+  justify-content: center;
+}
+
+.end-burst {
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+.end-burst span {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 1px;
+  opacity: 0;
+}
+.end-panel.is-open .end-burst span {
+  animation: end-burst 0.9s ease-out both;
+}
+.end-burst span:nth-child(1) {
+  background: var(--yt);
+  --dx: -48px;
+  --dy: -18px;
+  animation-delay: 0.05s;
+}
+.end-burst span:nth-child(2) {
+  background: var(--lime);
+  --dx: 42px;
+  --dy: -22px;
+  animation-delay: 0.1s;
+}
+.end-burst span:nth-child(3) {
+  background: var(--select);
+  --dx: -28px;
+  --dy: 16px;
+  animation-delay: 0.12s;
+}
+.end-burst span:nth-child(4) {
+  background: var(--link);
+  --dx: 36px;
+  --dy: 14px;
+  animation-delay: 0.08s;
+}
+.end-burst span:nth-child(5) {
+  background: var(--yt);
+  --dx: 0;
+  --dy: -30px;
+  animation-delay: 0.15s;
+}
+.end-burst span:nth-child(6) {
+  background: var(--lime);
+  --dx: -55px;
+  --dy: 4px;
+  animation-delay: 0.18s;
+}

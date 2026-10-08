@@ -1,0 +1,378 @@
+/* Bande cinéma : prend le reste, le bas reste toujours visible */
+.cinema {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  background: var(--cinema-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid var(--player-bg);
+  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.55);
+}
+
+.player {
+  width: 100%;
+  height: 100%;
+  max-width: 1280px;
+  background: var(--player-bg);
+  position: relative;
+}
+
+.player video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  background: var(--player-bg);
+}
+
+/* Barre player style YouTube Flash / 2010 */
+.yt-chrome {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 6px;
+  background: linear-gradient(180deg, #4a4a4a 0%, #2a2a2a 45%, #1a1a1a 100%);
+  border-top: 1px solid #5a5a5a;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  z-index: 8;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+.player:hover .yt-chrome:not(.is-disabled),
+.yt-chrome.is-active:not(.is-disabled),
+.yt-chrome.is-paused:not(.is-disabled) {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.yt-btn {
+  flex-shrink: 0;
+  width: 28px;
+  height: 26px;
+  border: 1px solid var(--player-track);
+  border-radius: var(--radius-sm);
+  background: linear-gradient(180deg, #555 0%, #333 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  color: var(--player-fg);
+  position: relative;
+  padding: 0;
+}
+.yt-btn:hover {
+  background: linear-gradient(180deg, #666 0%, #3a3a3a 100%);
+}
+.yt-btn:active {
+  background: linear-gradient(180deg, #333 0%, #222 100%);
+}
+.yt-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* Triangle play partagé (logo, chrome, big-play) */
+.logo-badge::after,
+.yt-btn.play::before,
+.big-play::after {
+  content: "";
+  position: absolute;
+  border-style: solid;
+  border-color: transparent transparent transparent var(--surface);
+}
+.yt-btn.play::before {
+  left: 10px;
+  top: 6px;
+  border-width: 7px 0 7px 11px;
+}
+.yt-btn.pause::before,
+.yt-btn.pause::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  width: 4px;
+  height: 14px;
+  background: var(--surface);
+  border-radius: 1px;
+}
+.yt-btn.pause::before {
+  left: 8px;
+}
+.yt-btn.pause::after {
+  left: 15px;
+}
+
+.yt-btn.seek-back,
+.yt-btn.seek-fwd {
+  width: 32px;
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: var(--player-fg);
+  letter-spacing: -0.04em;
+}
+.yt-btn.seek-back::before {
+  content: "◀5";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.yt-btn.seek-fwd::before {
+  content: "5▶";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Pistes progress / volume partagées */
+.yt-progress,
+.yt-vol-track {
+  background: var(--player-track);
+  border: 1px solid var(--player-bg);
+  border-radius: 1px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  touch-action: none;
+}
+
+.yt-progress {
+  flex: 1 1 auto;
+  height: 10px;
+  margin: 0 4px;
+}
+.yt-progress-load,
+.yt-progress-play {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+.yt-progress-load {
+  background: #444;
+}
+
+.yt-progress-play,
+.yt-vol-fill {
+  background: var(--gradient-yt);
+}
+.yt-progress-play {
+  box-shadow: 0 0 4px rgba(204, 0, 0, 0.45);
+}
+
+.yt-time {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--surface-muted);
+  text-shadow: 0 1px 0 var(--player-bg);
+  font-variant-numeric: tabular-nums;
+  min-width: 78px;
+  text-align: right;
+  padding-right: 2px;
+}
+
+/* Volume YouTube Flash / ~2010 */
+.yt-volume {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: 2px;
+  padding-left: 4px;
+  border-left: 1px solid var(--player-track);
+  box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.08);
+}
+
+.yt-btn.mute {
+  width: 30px;
+}
+.yt-btn.mute::before,
+.yt-btn.mute::after {
+  content: "";
+  position: absolute;
+  background: var(--player-fg);
+}
+/* Corps du haut-parleur */
+.yt-btn.mute::before {
+  left: 6px;
+  top: 8px;
+  width: 7px;
+  height: 10px;
+  clip-path: polygon(0 25%, 45% 25%, 100% 0, 100% 100%, 45% 75%, 0 75%);
+  border-radius: 1px;
+}
+/* Ondes sonores */
+.yt-btn.mute::after {
+  left: 15px;
+  top: 7px;
+  width: 8px;
+  height: 12px;
+  background: transparent;
+  border: 2px solid var(--player-fg);
+  border-left: none;
+  border-radius: 0 10px 10px 0;
+  box-shadow: 3px 0 0 -1px var(--player-fg);
+}
+.yt-btn.mute.is-muted::after {
+  left: 16px;
+  top: 8px;
+  width: 10px;
+  height: 10px;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background:
+    linear-gradient(45deg, transparent 42%, var(--yt-mid) 42%, var(--yt-mid) 58%, transparent 58%),
+    linear-gradient(-45deg, transparent 42%, var(--yt-mid) 42%, var(--yt-mid) 58%, transparent 58%);
+}
+
+.yt-vol-track {
+  width: 52px;
+  height: 8px;
+  margin: 0 4px 0 2px;
+}
+.yt-vol-fill {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  transform: scaleX(1);
+  transform-origin: left center;
+  box-shadow: 0 0 3px rgba(204, 0, 0, 0.4);
+  pointer-events: none;
+}
+.yt-vol-track.is-muted .yt-vol-fill {
+  background: linear-gradient(180deg, #777 0%, #555 55%, #333 100%);
+  box-shadow: none;
+}
+
+.player-placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(255, 180, 60, 0.12), transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(80, 180, 100, 0.1), transparent 45%),
+    var(--player-track);
+  color: var(--player-fg);
+  text-align: center;
+  padding: 20px;
+}
+
+.big-play {
+  width: 84px;
+  height: 58px;
+  border: none;
+  border-radius: 12px / 16px;
+  background: var(--gradient-yt);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 6px 20px rgba(0, 0, 0, 0.45);
+  position: relative;
+}
+.big-play::after {
+  left: 34px;
+  top: 16px;
+  border-width: 13px 0 13px 22px;
+}
+.big-play:hover {
+  filter: brightness(1.08);
+}
+
+.placeholder-text {
+  font-size: 0.95rem;
+  color: var(--player-muted);
+  max-width: 360px;
+  line-height: 1.4;
+}
+
+.picker-hint {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--hint);
+  letter-spacing: 0.01em;
+  opacity: 0.85;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+/* Label du quiz actif (placeholder : attente et fin).
+   is-hidden = fondu (pas display:none) pour laisser place au picker. */
+.quiz-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--surface-muted);
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  min-height: 1.2em;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.picker-hint.is-hidden,
+.quiz-label.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.quiz-label.is-hidden {
+  transform: translateY(-4px);
+  position: absolute;
+}
+
+/* Sélecteur discret : invisible sauf Ctrl+Alt+S */
+.quiz-picker {
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-block;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--player-fg);
+  background: var(--ink-strong) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23ccc' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E") no-repeat right 10px center;
+  border: 1px solid #555;
+  border-radius: var(--radius-sm);
+  padding: 7px 28px 7px 12px;
+  min-width: 200px;
+  max-width: min(320px, 90vw);
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  outline: none;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(6px);
+  transition:
+    var(--transition-fade),
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+.quiz-picker.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.quiz-picker:hover {
+  border-color: #777;
+  background-color: #2a2a2a;
+}
+.quiz-picker:focus {
+  border-color: var(--link);
+}
+.quiz-picker option {
+  background: var(--ink-strong);
+  color: var(--player-fg);
+}
+

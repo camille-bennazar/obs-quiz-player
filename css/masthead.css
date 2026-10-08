@@ -1,0 +1,66 @@
+/* Masthead YouTube classique */
+.masthead {
+  flex-shrink: 0;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  background: linear-gradient(180deg, var(--surface) 0%, var(--meta) 100%);
+  border-bottom: 1px solid var(--line-light);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  z-index: 20;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.03em;
+}
+
+.logo-badge {
+  width: 42px;
+  height: 28px;
+  border-radius: 6px / 8px;
+  background: var(--gradient-yt);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 1px 2px rgba(0, 0, 0, 0.25);
+  position: relative;
+}
+.logo-badge::after {
+  left: 16px;
+  top: 7px;
+  border-width: 7px 0 7px 12px;
+}
+
+.logo em {
+  font-style: normal;
+  font-weight: 400;
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-left: 2px;
+}
+
+.remain {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  color: var(--muted);
+  box-shadow: var(--shadow-inset-hi);
+}
+.remain strong {
+  color: var(--yt);
+  font-size: 1.15rem;
+  line-height: 1;
+}
+.remain #score-count {
+  color: var(--ok-edge);
+}

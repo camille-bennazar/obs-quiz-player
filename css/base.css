@@ -1,0 +1,46 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* display:flex / grid des auteurs sinon écrase l’UA [hidden] → overlay / actions restaient visibles */
+[hidden] {
+  display: none !important;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+  color: var(--ink);
+  background: var(--page);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Chrome UI : pas de sélection accidentelle ; texte lisible ailleurs */
+.masthead,
+.yt-chrome,
+.actions,
+.choices,
+.end-actions,
+.big-play {
+  user-select: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+button:focus-visible,
+.yt-progress:focus-visible,
+.yt-vol-track:focus-visible,
+.quiz-picker:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 2px;
+}

@@ -1,0 +1,36 @@
+/* Toast feedback */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%) translateY(12px);
+  z-index: 100;
+  max-width: min(480px, calc(100vw - 24px));
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--hint);
+  background: var(--ink-strong);
+  color: var(--player-fg);
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.35;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.toast.is-open {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+.toast.toast-error {
+  border-color: var(--danger-edge);
+  background: linear-gradient(180deg, #c33 0%, var(--yt-deep) 100%);
+  color: var(--surface);
+}
+.toast.toast-warn {
+  border-color: var(--select-deep);
+  background: linear-gradient(180deg, #f0c060 0%, var(--select) 100%);
+  color: var(--ink-strong);
+}

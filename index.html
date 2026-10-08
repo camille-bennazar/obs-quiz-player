@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>obs-quiz-player</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="logo">
+      <div class="logo-badge" aria-hidden="true"></div>
+      obs-quiz-player <em></em>
+    </div>
+    <div class="remain">Score <strong id="score-count">0</strong> · Restants <strong id="remain-count">—</strong></div>
+  </header>
+
+  <section class="cinema">
+    <div class="player">
+      <video id="quiz-video" playsinline preload="auto"></video>
+      <div class="player-placeholder" id="player-placeholder">
+        <p class="quiz-label" id="quiz-label"></p>
+        <select id="quiz-picker" class="quiz-picker" aria-label="Choisir le quiz" hidden></select>
+        <button class="big-play" id="btn-big-play" type="button" aria-label="Lancer l'extrait"></button>
+        <p class="placeholder-text" id="placeholder-text">Clique pour lancer l’extrait</p>
+        <p class="picker-hint" id="picker-hint">Changer de quiz : Ctrl+Alt+S</p>
+      </div>
+      <div class="yt-chrome is-disabled" id="yt-chrome" aria-label="Contrôles vidéo">
+        <button class="yt-btn play" id="btn-play" type="button" title="Lecture / Pause (Espace)" aria-label="Lecture / Pause" disabled></button>
+        <button class="yt-btn seek-back" id="btn-seek-back" type="button" title="−5 s (←)" aria-label="Reculer de 5 secondes" disabled></button>
+        <div class="yt-progress" id="yt-progress" role="slider" tabindex="-1" aria-label="Progression" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="yt-progress-load" id="yt-progress-load"></div>
+          <div class="yt-progress-play" id="yt-progress-play"></div>
+        </div>
+        <button class="yt-btn seek-fwd" id="btn-seek-fwd" type="button" title="+5 s (→)" aria-label="Avancer de 5 secondes" disabled></button>
+        <span class="yt-time" id="yt-time">0:00 / 0:00</span>
+        <div class="yt-volume">
+          <button class="yt-btn mute" id="btn-mute" type="button" title="Muet (M)" aria-label="Couper / rétablir le son" disabled></button>
+          <div class="yt-vol-track" id="yt-vol-track" role="slider" tabindex="-1" aria-label="Volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" title="Volume">
+            <div class="yt-vol-fill" id="yt-vol-fill"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="below">
+    <div class="watch">
+
+      <div class="title-row">
+        <img class="channel-avatar is-mystery" id="channel-avatar" alt="" width="54" height="54">
+        <div class="title-text">
+          <h1 class="video-title" id="video-title">obs-quiz-player</h1>
+          <div class="video-meta">
+            <span class="channel" id="channel-name">Extrait mystère</span>
+            <span id="meta-remain">— restants</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bio">
+        <div class="bio-head">
+          <div class="bio-head-left">
+            <span>Description</span>
+            <button class="btn-rules" id="btn-rules" type="button" aria-expanded="false">Règles</button>
+          </div>
+          <span id="bio-status">Propositions</span>
+        </div>
+        <div class="bio-body">
+
+          <div class="rules" id="rules-box">
+            <strong>Comment jouer</strong>
+            <ul>
+              <li>Lance l’extrait (Espace ou le gros play).</li>
+              <li>Pendant le round : Espace = pause/lecture · ← / → ou J / L = ±5 s · R = recommencer · M = muet.</li>
+              <li>Choisis parmi les 4 propositions (touches 1–4, pendant le round avant validation).</li>
+              <li>Valide avec Entrée, puis passe au suivant.</li>
+              <li>Le bandeau affiche le score et les questions restantes (hors déjà validées).</li>
+              <li>La photo s’affiche dès l’extrait ; le nom se révèle après validation.</li>
+              <li>Ctrl+Alt+S ouvre ou ferme le sélecteur (écran d’attente et fin ; confirmation si on a avancé, un récap, ou phase playing/validated/finished).</li>
+            </ul>
+          </div>
+
+          <div class="debrief" id="debrief-text"></div>
+
+          <div class="choices" id="choices-container"></div>
+
+          <div class="end-panel" id="end-panel" hidden>
+            <div class="end-burst" aria-hidden="true">
+              <span></span><span></span><span></span>
+              <span></span><span></span><span></span>
+            </div>
+            <h2 class="end-title">C’est fini !</h2>
+            <p class="end-score" id="end-score">Score : —</p>
+            <p class="end-thanks">Merci d’avoir participé,<br>de la part de toute la modération.</p>
+            <span class="end-credit">Fait avec amour par la modération</span>
+            <div class="end-actions">
+              <button class="btn-secondary" id="btn-recap" type="button">Voir le récap</button>
+              <button class="btn-primary" id="btn-restart" type="button">↺ Recommencer</button>
+            </div>
+          </div>
+
+          <div class="recap-panel" id="recap-panel" hidden>
+            <div class="recap-head">
+              <strong>Récapitulatif</strong>
+              <button class="btn-rules" id="btn-recap-close" type="button">Fermer</button>
+            </div>
+            <ol class="recap-list" id="recap-list"></ol>
+          </div>
+
+          <div class="actions" id="actions-row">
+            <button class="btn-primary" id="btn-action" type="button" disabled>Valider mon choix</button>
+            <span class="hints">Espace · ← → · J L · R · M · 1–4 · Entrée</span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="js/shared/toast.js"></script>
+  <script src="js/shared/utils.js"></script>
+  <script src="js/player/player.js"></script>
+  <script src="quiz/manifest.js"></script>
+  <script src="js/boot.js"></script>
+</body>
+</html>

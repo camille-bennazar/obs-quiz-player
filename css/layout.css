@@ -1,0 +1,86 @@
+/* Zone sous la vidéo : hauteur naturelle, jamais coupée par le scroll */
+.below {
+  flex: 0 0 auto;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 50% 40% at 10% 0%, rgba(255, 200, 90, 0.18), transparent 55%),
+    radial-gradient(ellipse 40% 35% at 90% 20%, rgba(120, 200, 80, 0.14), transparent 50%),
+    radial-gradient(ellipse 35% 30% at 70% 80%, rgba(90, 190, 210, 0.16), transparent 50%),
+    var(--meta);
+}
+
+.watch {
+  width: min(100%, 1280px);
+  margin: 0 auto;
+  padding: 8px 12px 10px;
+}
+
+/* Cartes blanches partagées */
+.title-row,
+.bio {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-card);
+}
+
+.title-row {
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+/* PP style vieux YouTube : carré fixe, crop centré */
+.channel-avatar {
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+  border-radius: 3px;
+  border: 1px solid var(--avatar-border);
+  background: linear-gradient(180deg, #f4f4f4 0%, var(--line) 100%);
+  box-shadow: var(--shadow-inset-hi), 0 1px 2px rgba(0, 0, 0, 0.08);
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+}
+
+.channel-avatar.is-mystery {
+  object-fit: none;
+  background:
+    radial-gradient(circle at 50% 38%, var(--border-mid) 0 28%, transparent 29%),
+    radial-gradient(ellipse at 50% 78%, var(--border-mid) 0 32%, transparent 33%),
+    linear-gradient(180deg, #ececec 0%, #d4d4d4 100%);
+}
+
+.title-text {
+  min-width: 0;
+}
+
+.video-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink-strong);
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
+
+.video-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  align-items: center;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.video-meta .channel {
+  color: var(--link);
+  font-weight: 700;
+}
+
+.bio {
+  overflow: hidden;
+}

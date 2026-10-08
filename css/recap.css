@@ -1,0 +1,101 @@
+/* Récapitulatif de session */
+.recap-panel {
+  margin-top: 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--panel-soft);
+  box-shadow: var(--shadow-inset-hi);
+  max-height: 220px;
+  overflow: auto;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s ease,
+    max-height 0.22s ease,
+    margin-top 0.22s ease,
+    border-color 0.2s ease;
+}
+.recap-panel.is-open {
+  opacity: 1;
+  transform: translateY(0);
+}
+.recap-panel:not(.is-open):not([hidden]) {
+  max-height: 0;
+  margin-top: 0;
+  opacity: 0;
+  transform: translateY(6px);
+  border-color: transparent;
+  overflow: hidden;
+  pointer-events: none;
+}
+.recap-head {
+  padding: 6px 10px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.recap-list {
+  list-style: none;
+  margin: 0;
+  padding: 6px 8px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.recap-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px;
+  align-items: center;
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+.recap-panel.is-open .recap-item,
+.recap-panel.is-open .recap-empty {
+  animation: var(--anim-soft-in);
+}
+.recap-item.is-ok {
+  border-color: var(--lime);
+  background: var(--gradient-recap-ok);
+}
+.recap-item.is-ko {
+  border-color: var(--yt-mid);
+  background: var(--gradient-recap-ko);
+}
+.recap-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.75rem;
+  color: var(--surface);
+  flex-shrink: 0;
+}
+.recap-item.is-ok .recap-badge {
+  background: var(--lime-deep);
+}
+.recap-item.is-ko .recap-badge {
+  background: var(--yt-deep);
+}
+.recap-body strong {
+  display: block;
+  color: var(--ink-strong);
+  margin-bottom: 2px;
+}
+.recap-body span {
+  color: var(--muted);
+}
+.recap-empty {
+  padding: 12px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
